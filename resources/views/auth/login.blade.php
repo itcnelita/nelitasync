@@ -31,12 +31,13 @@
         }
 
         .logo {
-            text-align: center;
-            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
         }
 
         .logo img {
             width: 120px;
+            display: block;
         }
 
         h1 {
@@ -117,6 +118,11 @@
                 transform: translateY(0);
             }
         }
+
+        .error-message {
+            color: red;
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
 @endpush
 
@@ -129,16 +135,23 @@
         <h1>Login</h1>
         <div class="subtitle">NELITA SYNC Platform</div>
 
-        <form method="POST" action="">
+        <form method="POST" action="/login">
+            @csrf
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="username" required>
+                <input type="email" name="email" required>
             </div>
 
             <div class="form-group">
                 <label>Password</label>
                 <input type="password" name="password" required>
             </div>
+
+            @error('email')
+                <div class="error-message text-danger" style="font-color:red">
+                    {{ $message }}
+                </div>
+            @enderror
 
             <button class="btn btn-login">Masuk</button>
         </form>

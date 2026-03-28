@@ -11,11 +11,15 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#1F4ED8">
     <link rel="icon" href="/assets/img/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-    @stack('head')
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    @stack('head')
 </head>
 
 
@@ -38,9 +42,8 @@
             });
 
         }
-
-        @stack('scripts')
     </script>
+    @stack('scripts')
 
 
 </body>

@@ -5,32 +5,44 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+
 class AuthController extends Controller
 {
-    public function showLogin()
+    public function showLogin() //view login page
     {
         return view('auth.login');
     }
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('/dashboard');
+            $request->session()->regenerate();
+            return redirect('/dashboard');
         }
 
-        return back()->with('error', 'Email atau password salah');
+        return back()->withErrors([
+            'email' => 'Email atau password salah'
+        ])->withInput();
     }
 
     public function dashboard()
     {
+
         return view('dashboard');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect('/login');
     }
 }
