@@ -34,8 +34,9 @@
             class="fixed inset-y-0 left-0 w-72 bg-white border-r border-slate-100 flex flex-col z-50 transform -translate-x-full lg:translate-x-0 lg:static lg:h-screen transition-transform duration-300 ease-in-out shadow-2xl lg:shadow-none">
             <div class="p-8 flex justify-between items-center">
                 <div class="flex items-center space-x-3 text-left">
-                    <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
-                        <i data-lucide="layout-grid" class="text-white w-6 h-6"></i>
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+                        {{--  <i data-lucide="layout-grid" class="text-white w-6 h-6"></i>  --}}
+                        <img class="w-6 h-6" src="{{ asset('assets/img/favicon.png') }}" alt="{{ __('') }}">
                     </div>
                     <span class="text-xl font-bold tracking-tight text-slate-800">NELITA<span
                             class="text-blue-600">SYNC</span></span>
@@ -101,7 +102,8 @@
                 class="glass-effect sticky top-0 z-20 border-b border-slate-100 px-4 lg:px-8 py-4 flex justify-between items-center">
                 <div class="flex items-center space-x-3 lg:hidden">
                     <button onclick="toggleSidebar()" class="p-2 -ml-2 text-slate-600 hover:bg-slate-50 rounded-xl">
-                        <i data-lucide="menu" class="w-6 h-6"></i>
+                        {{--  <i data-lucide="menu" class="w-6 h-6"></i>  --}}
+                        <img class="w-6 h-6" src="{{ asset('assets/img/favicon.png') }}" alt="{{ __('') }}">
                     </button>
                     <span class="font-bold text-slate-800 tracking-tight text-lg">NELITASYNC</span>
                 </div>
