@@ -52,7 +52,12 @@
                 <a href="#"
                     class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all">
                     <i data-lucide="home" class="w-5 h-5"></i>
-                    <span class="font-semibold">Beranda</span>
+                    <span class="font-semibold">Dashboard</span>
+                </a>
+                <a href="/attendance"
+                    class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all">
+                    <i data-lucide="calendar-check" class="w-5 h-5"></i>
+                    <span class="font-medium">Attendance</span>
                 </a>
                 <a href="#"
                     class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all">
@@ -128,7 +133,8 @@
 
             <div class="p-4 lg:p-8 max-w-6xl mx-auto">
                 <div class="mb-6 lg:mb-10 text-left">
-                    <h1 class="text-2xl lg:text-3xl font-bold text-slate-900 leading-tight tracking-tight">Beranda</h1>
+                    <h1 class="text-2xl lg:text-3xl font-bold text-slate-900 leading-tight tracking-tight">Selamat Pagi!
+                    </h1>
                     <p class="text-slate-500 mt-1 text-base lg:text-lg italic">Halo, {{ Auth::user()->name }} 👋</p>
                 </div>
 
