@@ -14,14 +14,81 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
+    public function run()
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Admin ITC',
+        // 1. DATA ADMIN
+        User::create([
+            'fullName' => 'Admin Utama NelitaSync',
+            'id_identity' => 'ADMIN001',
+            'class' => null,
             'email' => 'admin@itcnelita.com',
             'password' => Hash::make('123456'),
+            'role' => 'admin',
+            'status' => 'aktif',
         ]);
+
+        // 2. DATA GURU (10 Orang)
+        $namaGuru = [
+            'Pak Budi Pratama',
+            'Bu Siti Aminah',
+            'Pak Ahmad Fauzi',
+            'Bu Rina Wijaya',
+            'Pak Bambang Hermawan',
+            'Bu Dewi Lestari',
+            'Pak Eko Prasetyo',
+            'Bu Maya Indah',
+            'Pak Hendra Gunawan',
+            'Bu Sari Rahayu'
+        ];
+
+        foreach ($namaGuru as $index => $nama) {
+            User::create([
+                'fullName' => $nama,
+                'id_identity' => '19850312' . str_pad($index + 1, 4, '0', STR_PAD_LEFT),
+                'class' => null,
+                'email' => strtolower(str_replace(' ', '', $nama)) . '@guru.id',
+                'password' => Hash::make('password123'),
+                'role' => 'guru',
+                'status' => 'aktif',
+            ]);
+        }
+
+        // 3. DATA SISWA (20 Orang)
+        $namaSiswa = [
+            'Rizky Syahputra',
+            'Siti Maryam',
+            'Andi Wijaya',
+            'Bagas Saputra',
+            'Citra Kirana',
+            'Dendi Rahman',
+            'Eka Putri',
+            'Fajar Sidik',
+            'Gita Gutawa',
+            'Hadi Sucipto',
+            'Indah Permata',
+            'Jaka Tarub',
+            'Kiki Amelia',
+            'Lutfi Hakim',
+            'Maulana Malik',
+            'Nadia Safira',
+            'Oki Setiana',
+            'Putra Perkasa',
+            'Qori Antika',
+            'Ratih Purwasih'
+        ];
+
+        $kelas = ['X RPL 1', 'XI RPL 2', 'XII RPL 1', 'X TKJ 1', 'XI TKJ 2'];
+
+        foreach ($namaSiswa as $index => $nama) {
+            User::create([
+                'fullName' => $nama,
+                'id_identity' => null,
+                'class' => $kelas[array_rand($kelas)], // Random kelas dari array
+                'email' => strtolower(str_replace(' ', '', $nama)) . '@siswa.id',
+                'password' => Hash::make('password123'),
+                'role' => 'siswa',
+                'status' => ($index % 5 == 0) ? 'non-aktif' : 'aktif', // Variasi status
+            ]);
+        }
     }
 }

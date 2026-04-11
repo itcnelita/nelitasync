@@ -13,10 +13,28 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+
+            // Identitas (Nullable karena Siswa/Guru punya ID berbeda)
+            // $table->string('nisn')->nullable()->unique(); // Khusus Siswa
+            // $table->string('nip')->nullable()->unique();  // Khusus Guru/Staff
+            $table->string('id_identity')->nullable()->unique();  // Khusus Guru/Staff
+
+            $table->string('fullName');
+            $table->string('class')->nullable(); // Khusus Siswa, Guru mungkin tidak punya kelas tetap
+
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // Role: 'admin', 'guru', 'siswa'
+            $table->string('role')->default('siswa');
+
+            // Path Foto Profil
+            $table->string('profile_path')->nullable();
+
+            // Status: 'aktif', 'alumni', 'mutasi', dsb.
+            $table->string('status')->default('aktif');
+
             $table->rememberToken();
             $table->timestamps();
         });

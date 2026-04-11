@@ -16,6 +16,7 @@
 
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -25,12 +26,21 @@
 
 <body>
 
+    {{--  Import SideBar  --}}
+    @include('layouts.sideBar')
+    {{--  Import TopBar  --}}
+    @include('layouts.topBar')
+
+
+    {{--  Menerima Section Content  --}}
     @yield('content')
 
-    @yield('body')
+    {{--  Import BottomBar  --}}
+    @include('layouts.bottomBar')
 
-    <!-- SERVICE WORKER -->
+
     <script>
+        //Start ServiceWorker
         if ('serviceWorker' in navigator) {
 
             window.addEventListener('load', () => {
@@ -40,8 +50,31 @@
                     .catch(err => console.log("SW error", err));
 
             });
-
         }
+        //End
+
+
+        //Start Icon & Bar
+        lucide.createIcons(); // Inisialisasi Icon Lucide
+        function toggleSidebar() { // Fungsi Buka Tutup Sidebar Mobile
+            const sidebar = document.getElementById('mainSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+        //End
+
+        //Live Time for Attendance
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', {
+                hour12: false
+            });
+            document.getElementById('liveClock').textContent = timeString;
+            document.getElementById('liveClock-presensi').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
     </script>
     @stack('scripts')
 
