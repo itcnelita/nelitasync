@@ -68,7 +68,7 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-        background: #f0f4ff;
+        background: #ffffff;
     }
 
     /* HEADER BLOB (MOBILE ONLY) */
@@ -92,7 +92,7 @@
         left: 0;
         right: 0;
         height: 40px;
-        background: #f0f4ff;
+        background: #ffffff;
         border-radius: 50% 50% 0 0 / 100% 100% 0 0;
     }
 
@@ -204,7 +204,7 @@
     .footer-text {
         text-align: center;
         font-size: 11px;
-        color: #94a3b8;
+        color: #ffffff;
         margin-top: 35px;
     }
 
@@ -287,7 +287,8 @@
 
             <div class="form-container">
                 <h1 class="welcome-title" style="color: #0f172a; font-weight: 800;">Selamat datang</h1>
-                <p class="welcome-sub" style="color: #64748b; font-size: 14px; margin-top: 5px;">Masuk dengan akun
+                <p class="welcome-sub" style="color: #64748b; font-size: 14px; margin-top: 5px; margin-bottom: 10px;">
+                    Masuk dengan akun
                     sekolah Anda</p>
 
                 <form method="POST" action="{{ route('login') }}">
