@@ -3,26 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Login — NELITA SYNC</title>
 
-    <title>@yield('title')</title>
-
-    <!-- PWA CORE -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#1F4ED8">
-    <link rel="icon" href="/assets/img/favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    {{-- Fonts --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;600;800&display=swap"
         rel="stylesheet">
-
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <style>
-    * {
+    *,
+    *::before,
+    *::after {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
@@ -30,183 +27,300 @@
 
     body {
         font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #1F4ED8, #14B8A6);
+        background: #f0f4ff;
         min-height: 100vh;
+        display: flex;
+    }
+
+    .main-container {
+        display: flex;
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    /* ─────────────────────────────────────
+       SIDEBAR VISUAL (DESKTOP)
+    ───────────────────────────────────── */
+    .side-visual {
+        display: none;
+        flex: 1.2;
+        background: linear-gradient(135deg, #1F4ED8 0%, #1e40af 100%);
+        position: relative;
+        overflow: hidden;
+        color: white;
+        padding: 60px;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .side-visual::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+        background-size: 30px 30px;
+    }
+
+    /* ─────────────────────────────────────
+       FORM SECTION (ADAPTIF)
+    ───────────────────────────────────── */
+    .form-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: #f0f4ff;
+    }
+
+    /* HEADER BLOB (MOBILE ONLY) */
+    .mobile-blob-header {
+        position: relative;
+        height: 240px;
+        /* Sedikit lebih tinggi untuk mengakomodasi teks besar */
+        background: linear-gradient(145deg, #1F4ED8 0%, #2563EB 55%, #14B8A6 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 25px;
+        overflow: hidden;
+    }
+
+    .mobile-blob-header::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 40px;
+        background: #f0f4ff;
+        border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+
+    /* PENYESUAIAN: Logo ring dipertipis */
+    .logo-ring {
+        width: 68px;
+        height: 68px;
+        border-radius: 20px;
+        background: rgb(255, 255, 255);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        /* Border lebih tipis & halus */
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .login-box {
-        background: #fff;
-        width: 100%;
-        min-width: 350px;
-        max-width: 400px;
-        padding: 32px 26px;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, .15);
-        animation: fadeIn .8s ease;
-    }
-
-    .logo {
-        display: flex;
-        justify-content: center;
-    }
-
-    .logo img {
-        width: 120px;
-        display: block;
-    }
-
-    h1 {
-        text-align: center;
-        font-size: 22px;
-        font-weight: 700;
-        color: #1F4ED8;
-        margin-bottom: 6px;
-    }
-
-    .subtitle {
-        text-align: center;
-        font-size: 13px;
-        color: #64748b;
-        margin-bottom: 24px;
-    }
-
-    .form-group {
         margin-bottom: 14px;
+        position: relative;
+        z-index: 2;
+        backdrop-filter: blur(4px);
     }
 
-    label {
-        display: block;
-        font-size: 13px;
-        margin-bottom: 6px;
-        color: #334155;
+    /* PENYESUAIAN: App name mobile lebih besar */
+    .app-name-mobile {
+        color: white;
+        font-size: 22px;
+        /* Ukuran font ditingkatkan */
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
     }
 
-    .form-group input {
+    /* FORM CONTENT */
+    .form-container {
+        padding: 10px 32px 40px;
         width: 100%;
-        padding: 12px 14px;
-        border-radius: 10px;
-        border: 1px solid #cbd5e1;
-        font-size: 14px;
+        max-width: 420px;
+        margin: 0 auto;
     }
 
-    input:focus {
+    .field {
+        margin-bottom: 18px;
+    }
+
+    .field label {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        color: #64748b;
+        margin-bottom: 7px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .input-wrap input {
+        width: 100%;
+        padding: 15px 18px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 14px;
+        background: #fff;
+        font-size: 15px;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .input-wrap input:focus {
         outline: none;
         border-color: #1F4ED8;
-    }
-
-    .btn {
-        width: 100%;
-        padding: 14px;
-        border-radius: 12px;
-        border: none;
-        font-size: 15px;
-        font-weight: 600;
-        cursor: pointer;
-        margin-top: 10px;
-        transition: .3s;
+        box-shadow: 0 0 0 4px rgba(31, 78, 216, 0.1);
     }
 
     .btn-login {
-        background: #1F4ED8;
+        width: 100%;
+        padding: 16px;
+        border-radius: 14px;
+        border: none;
+        background: linear-gradient(135deg, #1F4ED8, #2563EB);
         color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 10px;
+        box-shadow: 0 6px 20px rgba(31, 78, 216, 0.25);
+        transition: transform 0.1s;
     }
 
-    .btn-login:hover {
-        background: #1e40af;
+    .btn-login:active {
+        transform: scale(0.98);
     }
 
-    .footer {
-        text-align: center;
-        margin-top: 18px;
-        font-size: 12px;
+    .role-chips {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+    }
+
+    .chip {
+        padding: 7px 14px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 100px;
+        font-size: 11px;
         color: #64748b;
+        font-weight: 600;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     }
 
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .footer-text {
+        text-align: center;
+        font-size: 11px;
+        color: #94a3b8;
+        margin-top: 35px;
     }
 
-    .error-message {
-        color: red;
-        font-family: 'Poppins', sans-serif;
+    /* ─────────────────────────────────────
+       BREAKPOINT: DESKTOP
+    ───────────────────────────────────── */
+    @media (min-width: 992px) {
+        body {
+            background: #eef2ff;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1150px;
+            height: 85vh;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(15, 23, 42, 0.15);
+        }
+
+        .side-visual {
+            display: flex;
+        }
+
+        .form-section {
+            background: #fff;
+            justify-content: center;
+        }
+
+        .mobile-blob-header {
+            display: none;
+        }
+
+        .form-container {
+            padding: 0 70px;
+            max-width: 500px;
+        }
+
+        .welcome-title {
+            font-size: 32px;
+            text-align: left;
+        }
+
+        .welcome-sub {
+            text-align: left;
+            margin-bottom: 35px;
+        }
     }
 </style>
 
 <body>
 
-    <div class="login-box">
-        <div class="logo">
-            <img src="/assets/img/logo-n-transparant.png" alt="NELITA SYNC">
-        </div>
+    <div class="main-container">
 
-        <h1>Login</h1>
-        <div class="subtitle">NELITA SYNC Platform</div>
-
-        <form method="POST" action="/login">
-            @csrf
-            <div class="form-group">
-                <label>Username</label>
-                <input type="email" name="email" required>
+        <div class="side-visual">
+            <div>
+                <h2 style="font-weight: 800; letter-spacing: 1.5px; font-size: 24px;">NELITA SYNC</h2>
+                <p style="opacity: 0.8; font-size: 14px; margin-top: 4px;">Platform Digital SMKN 5 Tangerang</p>
             </div>
-
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" required>
-            </div>
-
-            @error('email')
-                <div class="error-message text-danger" style="font-color:red">
-                    {{ $message }}
+            <div>
+                <h1 style="font-size: 48px; font-weight: 800; line-height: 1.1;">Satu platform untuk <br> seluruh
+                    ekosistem <br> sekolah.</h1>
+                <div style="width: 60px; height: 5px; background: #14B8A6; margin-top: 25px; border-radius: 10px;">
                 </div>
-            @enderror
-
-            <button class="btn btn-login">Masuk</button>
-        </form>
-
-        <div class="footer">
-            © 2026 ITC NELITA |
-            SMKN 5 Tangerang
+            </div>
+            <p style="font-size: 12px; opacity: 0.5;">&copy; 2026 ITC Nelita &bull; Dikembangkan dengan &hearts;</p>
         </div>
+
+        <div class="form-section">
+
+            <div class="mobile-blob-header">
+                <div class="logo-ring">
+                    <img src="/assets/img/logo-n-transparant.png" width="42" alt="">
+                </div>
+                <div class="app-name-mobile">NELITA SYNC</div>
+            </div>
+
+            <div class="form-container">
+                <h1 class="welcome-title" style="color: #0f172a; font-weight: 800;">Selamat datang</h1>
+                <p class="welcome-sub" style="color: #64748b; font-size: 14px; margin-top: 5px;">Masuk dengan akun
+                    sekolah Anda</p>
+
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                    <div class="field">
+                        <label>Alamat Email</label>
+                        <div class="input-wrap">
+                            <input type="email" name="email" placeholder="nama@sekolah.sch.id" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>Password</label>
+                        <div class="input-wrap">
+                            <input type="password" name="password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-login">Masuk Sekarang</button>
+                </form>
+
+                <div class="role-chips">
+                    <span class="chip">ADMIN</span>
+                    <span class="chip">GURU</span>
+                    <span class="chip">SISWA</span>
+                    <span class="chip">WALI</span>
+                </div>
+
+                <p class="footer-text">ITC NELITA &nbsp;&bull;&nbsp; SMKN 5 Tangerang</p>
+            </div>
+        </div>
+
     </div>
-
-    <script>
-        //Start ServiceWorker
-        if ('serviceWorker' in navigator) {
-
-            window.addEventListener('load', () => {
-
-                navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log("SW registered"))
-                    .catch(err => console.log("SW error", err));
-
-            });
-        }
-        //End
-
-
-        //Start Icon & Bar
-        lucide.createIcons(); // Inisialisasi Icon Lucide
-        function toggleSidebar() { // Fungsi Buka Tutup Sidebar Mobile
-            const sidebar = document.getElementById('mainSidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
-        }
-        //End
-    </script>
-    @stack('scripts')
-
 
 </body>
 

@@ -9,7 +9,7 @@ use App\Http\Controllers\ManageUserController;
 
 //Login
 Route::get('/', [AuthController::class, 'showLogin'])->name('showLoginDefault');
-Route::get('/login', [AuthController::class, 'showLogin'])->name('showLogin');
+Route::get('/login', [AuthController::class, 'showLogin'])->middleware('throttle:5,1')->name('showLogin');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
