@@ -13,6 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;600;800&display=swap"
         rel="stylesheet">
 
+    {{-- Vite / Asset Loading --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -27,9 +28,11 @@
 
     body {
         font-family: 'Poppins', sans-serif;
-        background: #f0f4ff;
+        background: #ffffff;
+        /* Putih bersih di mobile */
         min-height: 100vh;
         display: flex;
+        overflow-x: hidden;
     }
 
     .main-container {
@@ -39,7 +42,7 @@
     }
 
     /* ─────────────────────────────────────
-       SIDEBAR VISUAL (DESKTOP)
+       SIDEBAR VISUAL (HANYA DESKTOP)
     ───────────────────────────────────── */
     .side-visual {
         display: none;
@@ -71,11 +74,10 @@
         background: #ffffff;
     }
 
-    /* HEADER BLOB (MOBILE ONLY) */
+    /* HEADER BLOB (HANYA MOBILE) */
     .mobile-blob-header {
         position: relative;
         height: 240px;
-        /* Sedikit lebih tinggi untuk mengakomodasi teks besar */
         background: linear-gradient(145deg, #1F4ED8 0%, #2563EB 55%, #14B8A6 100%);
         display: flex;
         flex-direction: column;
@@ -83,6 +85,7 @@
         justify-content: center;
         padding-bottom: 25px;
         overflow: hidden;
+        flex-shrink: 0;
     }
 
     .mobile-blob-header::after {
@@ -96,14 +99,12 @@
         border-radius: 50% 50% 0 0 / 100% 100% 0 0;
     }
 
-    /* PENYESUAIAN: Logo ring dipertipis */
     .logo-ring {
         width: 68px;
         height: 68px;
         border-radius: 20px;
-        background: rgb(255, 255, 255);
+        background: rgba(255, 255, 255, 0.2);
         border: 1px solid rgba(255, 255, 255, 0.25);
-        /* Border lebih tipis & halus */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -113,11 +114,9 @@
         backdrop-filter: blur(4px);
     }
 
-    /* PENYESUAIAN: App name mobile lebih besar */
     .app-name-mobile {
         color: white;
         font-size: 22px;
-        /* Ukuran font ditingkatkan */
         font-weight: 800;
         letter-spacing: 1.5px;
         position: relative;
@@ -125,14 +124,34 @@
         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
     }
 
-    /* FORM CONTENT */
+    /* FORM CONTAINER */
     .form-container {
-        padding: 10px 32px 40px;
+        padding: 0 32px 40px;
         width: 100%;
         max-width: 420px;
         margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
     }
 
+    .welcome-title {
+        font-size: 24px;
+        font-weight: 800;
+        color: #0f172a;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .welcome-sub {
+        font-size: 15px;
+        color: #475569;
+        text-align: center;
+        margin-bottom: 30px;
+        margin-top: 5px;
+    }
+
+    /* INPUTS */
     .field {
         margin-bottom: 18px;
     }
@@ -154,6 +173,7 @@
         border-radius: 14px;
         background: #fff;
         font-size: 15px;
+        font-family: 'DM Sans', sans-serif;
         transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
@@ -163,6 +183,7 @@
         box-shadow: 0 0 0 4px rgba(31, 78, 216, 0.1);
     }
 
+    /* BUTTON */
     .btn-login {
         width: 100%;
         padding: 16px;
@@ -182,6 +203,7 @@
         transform: scale(0.98);
     }
 
+    /* ROLE CHIPS */
     .role-chips {
         display: flex;
         justify-content: center;
@@ -198,18 +220,19 @@
         font-size: 11px;
         color: #64748b;
         font-weight: 600;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     }
 
+    /* FOOTER */
     .footer-text {
         text-align: center;
         font-size: 11px;
-        color: #ffffff;
-        margin-top: 35px;
+        color: #94a3b8;
+        margin-top: auto;
+        padding: 40px 0 20px;
     }
 
     /* ─────────────────────────────────────
-       BREAKPOINT: DESKTOP
+       BREAKPOINT: DESKTOP (992px+)
     ───────────────────────────────────── */
     @media (min-width: 992px) {
         body {
@@ -223,6 +246,7 @@
             width: 100%;
             max-width: 1150px;
             height: 85vh;
+            min-height: 650px;
             border-radius: 32px;
             overflow: hidden;
             box-shadow: 0 40px 100px rgba(15, 23, 42, 0.15);
@@ -244,16 +268,25 @@
         .form-container {
             padding: 0 70px;
             max-width: 500px;
+            justify-content: center;
         }
 
         .welcome-title {
             font-size: 32px;
             text-align: left;
+            margin-top: 0;
         }
 
         .welcome-sub {
+            font-size: 16px;
             text-align: left;
             margin-bottom: 35px;
+        }
+
+        .footer-text {
+            text-align: left;
+            padding-top: 0;
+            margin-top: 40px;
         }
     }
 </style>
@@ -280,23 +313,22 @@
 
             <div class="mobile-blob-header">
                 <div class="logo-ring">
-                    <img src="/assets/img/logo-n-transparant.png" width="42" alt="">
+                    <img src="/assets/img/logo-n-transparant.png" width="42" alt="Logo">
                 </div>
                 <div class="app-name-mobile">NELITA SYNC</div>
             </div>
 
             <div class="form-container">
-                <h1 class="welcome-title" style="color: #0f172a; font-weight: 800;">Selamat datang</h1>
-                <p class="welcome-sub" style="color: #64748b; font-size: 14px; margin-top: 5px; margin-bottom: 10px;">
-                    Masuk dengan akun
-                    sekolah Anda</p>
+                <h1 class="welcome-title">Selamat datang</h1>
+                <p class="welcome-sub">Masuk dengan akun sekolah Anda</p>
 
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="field">
                         <label>Alamat Email</label>
                         <div class="input-wrap">
-                            <input type="email" name="email" placeholder="nama@sekolah.sch.id" required autofocus>
+                            <input type="email" name="email" value="{{ old('email') }}"
+                                placeholder="nama@sekolah.sch.id" required autofocus>
                         </div>
                     </div>
 
