@@ -103,7 +103,7 @@
         width: 68px;
         height: 68px;
         border-radius: 20px;
-        background: rgba(255, 255, 255, 0.2);
+        background: rgb(255, 255, 255);
         border: 1px solid rgba(255, 255, 255, 0.25);
         display: flex;
         align-items: center;
