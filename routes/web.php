@@ -5,26 +5,33 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\KawanNelitaController;
 use App\Http\Controllers\ManageUserController;
+use App\Http\Controllers\EkstrakulikulerController; // Import controller baru
 
-
-//Login
+// --- Public Routes ---
 Route::get('/', [AuthController::class, 'showLogin'])->name('showLoginDefault');
 Route::get('/login', [AuthController::class, 'showLogin'])->middleware('throttle:5,1')->name('showLogin');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
+// --- Protected Routes (Perlu Login) ---
+Route::middleware(['auth'])->group(function () {
 
-// Attendance
-Route::get('/attendance', [AttendanceController::class, 'index'])->middleware('auth')->name('attendance');
-Route::post('/attendance', [AttendanceController::class, 'insert'])->middleware('auth')->name('attendance.insert');
+    Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-//KawanNelita
-Route::get('/KawanNelita', [KawanNelitaController::class, 'index'])->middleware('auth')->name('kawanNelita');
-Route::get('/KawanNelita/reply', [KawanNelitaController::class, 'reply'])->middleware('auth');
+    // Attendance
+    Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance');
+    Route::post('/attendance', [AttendanceController::class, 'insert'])->name('attendance.insert');
 
+    // KawanNelita
+    Route::get('/KawanNelita', [KawanNelitaController::class, 'index'])->name('kawanNelita');
+    Route::get('/KawanNelita/reply', [KawanNelitaController::class, 'reply']);
 
-//Manage User
-Route::get('/ManageUser', [ManageUserController::class, 'index'])->middleware('auth')->name('ManageUser');
-Route::post('/ManageUser/user/insert', [ManageUserController::class, 'insert'])->middleware('auth')->name('user.insert');
-Route::get('/ManageUser/User/Destroy{id}', [ManageUserController::class, 'userDestroy'])->middleware('auth')->name('user.destroy');
+    // Ekstrakurikuler (Baru)
+    Route::get('/ekstrakurikuler', [EkstrakulikulerController::class, 'index'])->name('ekstrakulikuler.index');
+    Route::post('/ekstrakurikuler/daftar/{id}', [EkstrakulikulerController::class, 'daftar'])->name('ekstrakulikuler.daftar');
+
+    // Manage User (Biasanya untuk Admin)
+    Route::get('/ManageUser', [ManageUserController::class, 'index'])->name('ManageUser');
+    Route::post('/ManageUser/user/insert', [ManageUserController::class, 'insert'])->name('user.insert');
+    Route::get('/ManageUser/User/Destroy{id}', [ManageUserController::class, 'userDestroy'])->name('user.destroy');
+});

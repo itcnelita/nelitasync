@@ -20,24 +20,34 @@
         <nav class="flex-1 px-6 space-y-2 overflow-y-auto no-scrollbar text-left">
             <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-[2px] px-4 italic">Menu
                 Utama</label>
-            <a href="{{ route('dashboard') }}"
-                class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-500 {{ Route::is('dashboard*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : '' }}">
 
+            <a href="{{ route('dashboard') }}"
+                class="flex items-center space-x-3 px-4 py-3 rounded-xl {{ Route::is('dashboard*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all' }}">
                 <i data-lucide="home" class="w-5 h-5"></i>
                 <span class="font-medium">Dashboard</span>
             </a>
+
             <a href="{{ route('attendance') }}"
-                class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-500 {{ Route::is('attendance*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : '' }}">
+                class="flex items-center space-x-3 px-4 py-3 rounded-xl {{ Route::is('attendance*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all' }}">
                 <i data-lucide="user-check" class="w-5 h-5"></i>
                 <span class="font-medium">Attendance</span>
             </a>
+
+            {{-- Menu Ekstrakurikuler Baru --}}
+            <a href="{{ route('ekstrakulikuler.index') }}"
+                class="flex items-center space-x-3 px-4 py-3 rounded-xl {{ Route::is('ekstrakulikuler*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all' }}">
+                <i data-lucide="ghost" class="w-5 h-5"></i>
+                <span class="font-medium">Ekstrakurikuler</span>
+            </a>
+
             <a href="#"
                 class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all">
                 <i data-lucide="calendar-range" class="w-5 h-5"></i>
                 <span class="font-medium">Jadwal & KBM</span>
             </a>
+
             <a href="{{ route('kawanNelita') }}"
-                class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-500 {{ Route::is('kawanNelita*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : '' }}">
+                class="flex items-center space-x-3 px-4 py-3 rounded-xl {{ Route::is('kawanNelita*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all' }}">
                 <i data-lucide="hand-metal" class="w-5 h-5"></i>
                 <span class="font-medium">KawanNelita</span>
             </a>
