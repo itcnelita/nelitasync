@@ -29,7 +29,6 @@
     body {
         font-family: 'Poppins', sans-serif;
         background: #ffffff;
-        /* Putih bersih di mobile */
         min-height: 100vh;
         display: flex;
         overflow-x: hidden;
@@ -42,7 +41,7 @@
     }
 
     /* ─────────────────────────────────────
-       SIDEBAR VISUAL (HANYA DESKTOP)
+        SIDEBAR VISUAL (DESKTOP)
     ───────────────────────────────────── */
     .side-visual {
         display: none;
@@ -65,7 +64,7 @@
     }
 
     /* ─────────────────────────────────────
-       FORM SECTION (ADAPTIF)
+        FORM SECTION
     ───────────────────────────────────── */
     .form-section {
         flex: 1;
@@ -74,7 +73,7 @@
         background: #ffffff;
     }
 
-    /* HEADER BLOB (HANYA MOBILE) */
+    /* MOBILE HEADER */
     .mobile-blob-header {
         position: relative;
         height: 240px;
@@ -99,19 +98,45 @@
         border-radius: 50% 50% 0 0 / 100% 100% 0 0;
     }
 
-    .logo-ring {
-        width: 68px;
-        height: 68px;
-        border-radius: 20px;
-        background: rgb(255, 255, 255);
-        border: 1px solid rgba(255, 255, 255, 0.25);
+    /* LOGO WRAPPER */
+    .logo-wrapper {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 14px;
         position: relative;
         z-index: 2;
-        backdrop-filter: blur(4px);
+        transition: all 0.3s ease;
+    }
+
+    /* Mobile Logo (Tetap pakai background putih agar kontras dengan gradient) */
+    .mobile-blob-header .logo-wrapper {
+        width: 68px;
+        height: 68px;
+        background: #ffffff;
+        border-radius: 20px;
+        margin-bottom: 14px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Desktop Logo Container */
+    .desktop-logo-container {
+        display: none;
+        justify-content: center;
+        padding-bottom: 70px;
+        padding-top: 10px;
+    }
+
+    .desktop-logo-container .logo-wrapper {
+        background: transparent;
+        /* Transparan di Desktop */
+        box-shadow: none;
+        border: none;
+    }
+
+    /* Ukuran gambar logo di desktop */
+    .desktop-logo-container .logo-wrapper img {
+        width: 120px;
+        height: auto;
     }
 
     .app-name-mobile {
@@ -128,7 +153,7 @@
     .form-container {
         padding: 0 32px 40px;
         width: 100%;
-        max-width: 420px;
+        max-width: 440px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -140,15 +165,14 @@
         font-weight: 800;
         color: #0f172a;
         text-align: center;
-        margin-top: 10px;
     }
 
     .welcome-sub {
         font-size: 15px;
         color: #475569;
         text-align: center;
-        margin-bottom: 30px;
-        margin-top: 5px;
+        margin-bottom: 35px;
+        margin-top: 8px;
     }
 
     /* INPUTS */
@@ -196,7 +220,12 @@
         cursor: pointer;
         margin-top: 10px;
         box-shadow: 0 6px 20px rgba(31, 78, 216, 0.25);
-        transition: transform 0.1s;
+        transition: all 0.2s;
+    }
+
+    .btn-login:hover {
+        opacity: 0.95;
+        box-shadow: 0 8px 25px rgba(31, 78, 216, 0.35);
     }
 
     .btn-login:active {
@@ -214,7 +243,7 @@
 
     .chip {
         padding: 7px 14px;
-        background: #fff;
+        background: #f8fafc;
         border: 1px solid #e2e8f0;
         border-radius: 100px;
         font-size: 11px;
@@ -232,7 +261,7 @@
     }
 
     /* ─────────────────────────────────────
-       BREAKPOINT: DESKTOP (992px+)
+        BREAKPOINT: DESKTOP (992px+)
     ───────────────────────────────────── */
     @media (min-width: 992px) {
         body {
@@ -246,7 +275,7 @@
             width: 100%;
             max-width: 1150px;
             height: 85vh;
-            min-height: 650px;
+            min-height: 700px;
             border-radius: 32px;
             overflow: hidden;
             box-shadow: 0 40px 100px rgba(15, 23, 42, 0.15);
@@ -265,28 +294,31 @@
             display: none;
         }
 
+        .desktop-logo-container {
+            display: flex;
+        }
+
         .form-container {
-            padding: 0 70px;
-            max-width: 500px;
+            padding: 0 80px;
+            max-width: 560px;
             justify-content: center;
         }
 
         .welcome-title {
-            font-size: 32px;
+            font-size: 25px;
             text-align: left;
-            margin-top: 0;
+            letter-spacing: -0.5px;
         }
 
         .welcome-sub {
-            font-size: 16px;
             text-align: left;
-            margin-bottom: 35px;
+            font-size: 17px;
+            margin-bottom: 40px;
         }
 
         .footer-text {
-            text-align: left;
             padding-top: 0;
-            margin-top: 40px;
+            margin-top: 50px;
         }
     }
 </style>
@@ -312,23 +344,30 @@
         <div class="form-section">
 
             <div class="mobile-blob-header">
-                <div class="logo-ring">
+                <div class="logo-wrapper">
                     <img src="/assets/img/logo-n-transparant.png" width="42" alt="Logo">
                 </div>
                 <div class="app-name-mobile">NELITA SYNC</div>
             </div>
 
             <div class="form-container">
-                <h1 class="welcome-title">Selamat datang</h1>
-                <p class="welcome-sub">Masuk dengan akun sekolah Anda</p>
+
+                <div class="desktop-logo-container">
+                    <div class="logo-wrapper">
+                        <img src="/assets/img/logo-n-transparant.png" alt="Logo">
+                    </div>
+                </div>
+
+                {{--  <h1 class="welcome-title">Selamat datang</h1>
+                <p class="welcome-sub">Masuk dengan akun sekolah Anda</p>  --}}
 
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="field">
-                        <label>Alamat Email</label>
+                        <label>NISN / NIP</label>
                         <div class="input-wrap">
-                            <input type="email" name="email" value="{{ old('email') }}"
-                                placeholder="nama@sekolah.sch.id" required autofocus>
+                            <input type="email" name="email" value="{{ old('email') }}" placeholder="-" required
+                                autofocus>
                         </div>
                     </div>
 
