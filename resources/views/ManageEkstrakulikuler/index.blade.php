@@ -89,8 +89,8 @@
                                                 class="p-2 text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
                                                 <i data-lucide="edit-3" class="w-4 h-4"></i>
                                             </button>
-                                            <form action="{{ route('ekstrakulikuler.destroy', $item->id) }}" method="POST"
-                                                onsubmit="return confirm('Yakin ingin menghapus?')">
+                                            <form action="{{ route('ManageEkstrakulikuler.destroy', $item->id) }}"
+                                                method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
                                                 @csrf @method('DELETE')
                                                 <button
                                                     class="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
@@ -365,7 +365,7 @@
                                                 class="p-2 text-amber-600 hover:bg-amber-50 rounded-lg transition-colors">
                                                 <i data-lucide="edit-3" class="w-4 h-4"></i>
                                             </button>
-                                            <form action="{{ route('ekstrakulikuler.destroy', $item->id) }}"
+                                            <form action="{{ route('ManageEkstrakulikuler.destroy', $item->id) }}"
                                                 method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
                                                 @csrf @method('DELETE')
                                                 <button
