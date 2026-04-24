@@ -6,6 +6,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\KawanNelitaController;
 use App\Http\Controllers\ManageUserController;
 use App\Http\Controllers\EkstrakulikulerController; // Import controller baru
+use App\Http\Controllers\ManageEkstrakulikulerController;
 
 // --- Public Routes ---
 Route::get('/', [AuthController::class, 'showLogin'])->name('showLoginDefault');
@@ -31,7 +32,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/ekstrakurikuler/daftar/{id}', [EkstrakulikulerController::class, 'daftar'])->name('ekstrakulikuler.daftar');
 
     // Manage User (Biasanya untuk Admin)
-    Route::get('/ManageUser', [ManageUserController::class, 'index'])->name('ManageUser');
-    Route::post('/ManageUser/user/insert', [ManageUserController::class, 'insert'])->name('user.insert');
-    Route::get('/ManageUser/User/Destroy{id}', [ManageUserController::class, 'userDestroy'])->name('user.destroy');
+    Route::get('/ManageUsers', [ManageUserController::class, 'index'])->name('ManageUser.index');
+    Route::post('/ManageUser/insert', [ManageUserController::class, 'insert'])->name('ManageUser.insert');
+    Route::put('/ManageUser/update/{id}', [ManageUserController::class, 'update'])->name('ManageUser.update');
+    Route::delete('/ManageUser/delete/{id}', [ManageUserController::class, 'userDestroy'])->name('ManageUser.destroy');
+
+    // Manage Ekstrakurikuler (Admin)
+    Route::get('/ManageEkstrakurikuler', [ManageEkstrakulikulerController::class, 'manage'])->name('ManageEkstrakulikuler.index');
+    Route::post('/ManageEkstrakurikuler/store', [ManageEkstrakulikulerController::class, 'store'])->name('ManageEkstrakulikuler.store');
+    Route::put('/ManageEkstrakurikuler/update/{id}', [ManageEkstrakulikulerController::class, 'update'])->name('ManageEkstrakulikuler.update');
+    Route::delete('/ManageEkstrakurikuler/delete/{id}', [ManageEkstrakulikulerController::class, 'destroy'])->name('ManageEkstrakulikuler.destroy');
 });

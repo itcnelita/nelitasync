@@ -14,9 +14,6 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
 
-            // Identitas (Nullable karena Siswa/Guru punya ID berbeda)
-            // $table->string('nisn')->nullable()->unique(); // Khusus Siswa
-            // $table->string('nip')->nullable()->unique();  // Khusus Guru/Staff
             $table->string('id_identity')->nullable()->unique();  // Khusus Guru/Staff
 
             $table->string('fullName');

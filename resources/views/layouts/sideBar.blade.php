@@ -6,8 +6,7 @@
         <div class="p-8 flex justify-between items-center">
             <div class="flex items-center space-x-3 text-left">
                 <div class="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
-                    {{--  <i data-lucide="layout-grid" class="text-white w-6 h-6"></i>  --}}
-                    <img class="w-6 h-6" src="{{ asset('assets/img/favicon.png') }}" alt="{{ __('') }}">
+                    <img class="w-6 h-6" src="{{ asset('assets/img/favicon.png') }}" alt="NelitaSync">
                 </div>
                 <span class="text-xl font-bold tracking-tight text-slate-800">NELITA<span
                         class="text-blue-600">SYNC</span></span>
@@ -33,9 +32,8 @@
                 <span class="font-medium">Attendance</span>
             </a>
 
-            {{-- Menu Ekstrakurikuler Baru --}}
             <a href="{{ route('ekstrakulikuler.index') }}"
-                class="flex items-center space-x-3 px-4 py-3 rounded-xl {{ Route::is('ekstrakulikuler*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all' }}">
+                class="flex items-center space-x-3 px-4 py-3 rounded-xl {{ Route::is('ekstrakulikuler.index') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all' }}">
                 <i data-lucide="ghost" class="w-5 h-5"></i>
                 <span class="font-medium">Ekstrakurikuler</span>
             </a>
@@ -78,11 +76,19 @@
                 <label
                     class="text-[10px] font-extrabold text-slate-400 uppercase tracking-[2px] px-4 italic">Manage</label>
                 <div class="mt-2 space-y-1">
-                    <a href="{{ route('ManageUser') }}"
-                        class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-500 {{ Route::is('ManageUser*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : 'text-slate-600' }}">
+                    <a href="{{ route('ManageUser.index') }}"
+                        class="flex items-center space-x-3 px-4 py-3 rounded-xl {{ Route::is('ManageUser*') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all' }}">
                         <i data-lucide="user-round" class="w-5 h-5"></i>
                         <span class="font-medium">User</span>
                     </a>
+
+                    {{-- Menu Manage Ekstrakurikuler --}}
+                    <a href="{{ route('ManageEkstrakulikuler.index') }}"
+                        class="flex items-center space-x-3 px-4 py-3 rounded-xl {{ Route::is('ManageEkstrakulikuler.index') ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 transition-all font-semibold' : 'text-slate-500 hover:bg-blue-50 hover:text-blue-600 transition-all' }}">
+                        <i data-lucide="component" class="w-5 h-5"></i>
+                        <span class="font-medium">Ekstrakulikuler</span>
+                    </a>
+
                     <a href="#"
                         class="flex items-center space-x-3 px-4 py-3 rounded-xl text-amber-600 hover:bg-amber-50 transition-all">
                         <i data-lucide="user-round-key" class="w-5 h-5"></i>
@@ -99,16 +105,15 @@
                         class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center font-bold text-blue-700 shrink-0">
                         {{ substr(Auth::user()->fullName, 0, 1) }}
                     </div>
-                    {{-- Tampilan kalau belum login (misal di halaman Login) --}}
                     <div class="flex-1 min-w-0">
                         <p class="text-sm font-bold text-slate-800 truncate">{{ Auth::user()->fullName }}</p>
-                        <p class="text-xs text-slate-500">Siswa Aktif</p>
-                    @else
-                        <p>Guest / Belum Login</p>
+                        <p class="text-xs text-slate-500">{{ ucfirst(Auth::user()->role) }} Nelita</p>
+                    </div>
+                @else
+                    <p class="text-sm font-bold text-slate-800">Guest</p>
                 @endif
             </div>
         </div>
-</div>
-</aside>
+    </aside>
 
-<main class="flex-1 w-full min-w-0 overflow-x-hidden">
+    <main class="flex-1 w-full min-w-0 overflow-x-hidden">

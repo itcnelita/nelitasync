@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ManageEkstrakulikulerModel;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,6 +27,29 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'status' => 'aktif',
         ]);
+
+        ManageEkstrakulikulerModel::create(
+            [
+                'name'      => 'IT Community',
+                'category'  => 'Teknologi & Sains',
+                'pembina'   => 'Pak Efendy',
+                'day'       => 'Minggu',
+                'time'      => '10:00 - 14:00',
+                'location'  => 'Lab Komputer 2',
+                'is_active' => 1,
+            ]
+        );
+        ManageEkstrakulikulerModel::create(
+            [
+                'name'      => 'Broadcast',
+                'category'  => 'Teknologi & Sains',
+                'pembina'   => 'Pak Ibnu Hibban',
+                'day'       => 'Sabtu',
+                'time'      => '10:00 - 14:00',
+                'location'  => 'Perpustakaan',
+                'is_active' => 1,
+            ],
+        );
 
         // 2. DATA GURU (10 Orang)
         $namaGuru = [
